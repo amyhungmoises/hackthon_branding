@@ -6,9 +6,55 @@
     <title>Search Bar Example</title>
     <style>
         .search-container {
-            text-align: center;
-            margin-top: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
         }
+        #searchBox {
+            width: 300px;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px 5px 5px 5px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        
+        #searchBox:focus {
+            border-color: #007BFF;
+        }
+
+        #searchButton {
+            padding: 10px 20px;
+            border: 2px solid #007BFF;
+            border-radius: 0 5px 5px 0;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        .three_button {
+            padding: 10px 20px;
+            border: 2px solid #007BFF;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .three_button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        .three_button:active {
+            background-color: #004494;
+            transform: scale(0.95);
+        }
+
         input[type="text"] {
             width: 300px;
             padding: 10px;
@@ -22,35 +68,70 @@
 
         .hiddenContent {
             display: none;
-            margin-top: 20px;
-            font-size: 14px;
-            color: green;
         }
 
         .image-container {
             margin-top: 20px;
+            justify-content: center; /* Centers the image blocks horizontally */
+            flex-wrap: wrap; /* Allows images to wrap to the next line if necessary */
+            gap: 10px; /* Adds space between the image blocks */
         }
 
         .image-asset{
-            display: none;            
+            display: none;         
+            text-align: center;   
         }
 
-        img {
-            max-width: 200px;
+        .image-asset img {
+            max-width: 500px;
             margin: 10px;
         }
 
         .video-container {
             margin-top: 20px;
+            justify-content: center; /* Centers content horizontally */
+            flex-wrap: wrap; /* Allows content to wrap if necessary */
+            gap: 20px; /* Adds space between video sections */
+            margin: 20px 0; /* Optional: Adjusts top and bottom margin */
         }
         .video-asset{
-            display: none;            
+            display: none;   
+            text-align: center;
+            margin: 10px; /* Optional: Adds margin around each asset */
         }
+
+        .video-asset-container {
+            position: relative;
+            margin-top: 50px;
+        }
+
+        .video-button-container button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: 2px solid #008CBA;
+            border-radius: 5px;
+            background-color: #008CBA;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .video-button-container button:hover {
+            background-color: #006f9b;
+            transform: scale(1.05);
+        }
+
+        .video-button-container button:active {
+            background-color: #005f8a;
+            transform: scale(0.95);
+        }
+
         .button-container {
             display: flex;
             justify-content: center; /* Center-aligns the items horizontally */
             align-items: center; /* Vertically aligns the items if needed */
-            margin-left: 10px;
+            gap: 15px; /* Space between buttons */
+            margin-top: 20px;
         }
 
         #overlay {
@@ -85,26 +166,38 @@
             background-color: #4CAF50;
             color: white;
         }
+
+        .background-section {
+            height: 300px;
+            background-image: url('LinkedIn cover Personal.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
        
     </style>
 </head>
 <body>
+    <div class="background-section">
+        <!-- Content here -->
+    </div>
+
     <div class="search-container">
         <input type="text" id="searchBox" placeholder="Search...">
-        <input type="button" value="Search" onclick="performSearch()">
+        <input type="button" id="searchButton" value="Search" onclick="performSearch()">
     </div>
 
     <div class="button-container">
         <div id="Image" class="hiddenContent">
-            <input type="button" value="Image" onclick="click_image(true)">
+            <input type="button" class="three_button" value="Image" onclick="click_image(true)">
         </div>
 
         <div id="Video" class="hiddenContent">
-            <input type="button" value="Video" onclick="click_video(true)">
+            <input type="button" class="three_button" value="Video" onclick="click_video(true)">
         </div>
 
         <div id="All" class="hiddenContent">
-            <input type="button" value="All" onclick="click_all()">
+            <input type="button" class="three_button" value="All" onclick="click_all()">
         </div>
     </div>
 
@@ -123,20 +216,49 @@
             <img src="images/producer/jpg/IMG_3215.jpg" onclick="handleImageClick('producer', 'IMG_3215')">
             <img src="images/producer/jpg/IMG_3299 copy.jpg" onclick="handleImageClick('producer', 'IMG_3299 copy')">
         </div>
-        <div id="image-bass" class="image-asset">
-            <img src="images/bass/jpg/DIA 1 SYNC BRUTO TIMECODE.12_13_41_19.Still140.jpg" onclick="handleImageClick('bass', 'DIA 1 SYNC BRUTO TIMECODE.12_13_41_19.Still140')">
-            <img src="images/bass/jpg/DIA 1 SYNC BRUTO TIMECODE.12_19_20_02.Still162.jpg" onclick="handleImageClick('bass', 'DIA 1 SYNC BRUTO TIMECODE.12_19_20_02.Still162')">
-            <img src="images/bass/jpg/DIA 1 SYNC BRUTO TIMECODE.14_38_38_18.Still324.jpg" onclick="handleImageClick('bass', 'DIA 1 SYNC BRUTO TIMECODE.14_38_38_18.Still324')">
-            <img src="images/bass/jpg/DIA 1 SYNC BRUTO TIMECODE.14_38_48_13.Still325.jpg" onclick="handleImageClick('bass', 'DIA 1 SYNC BRUTO TIMECODE.14_38_48_13.Still325')">
-            <img src="images/bass/jpg/DIA 1 SYNC BRUTO TIMECODE.14_39_13_02.Still327.jpg" onclick="handleImageClick('bass', 'DIA 1 SYNC BRUTO TIMECODE.14_39_13_02.Still327')">
+        <div id="image-app" class="image-asset">
+            <img src="images/app/jpg/DIA 1 SYNC BRUTO TIMECODE.14_41_27_13.Still345.jpg" onclick="handleImageClick('app', 'DIA 1 SYNC BRUTO TIMECODE.14_41_27_13.Still345')">
+            <img src="images/app/jpg/DIA 1 SYNC BRUTO TIMECODE.16_12_06_20.Still507.jpg" onclick="handleImageClick('app', 'DIA 1 SYNC BRUTO TIMECODE.16_12_06_20.Still507')">
+            <img src="images/app/jpg/DIA 1 SYNC BRUTO TIMECODE.16_15_58_15.Still520.jpg" onclick="handleImageClick('app', 'DIA 1 SYNC BRUTO TIMECODE.16_15_58_15.Still520')">
+            <img src="images/app/jpg/DIA 1 SYNC BRUTO TIMECODE.16_17_25_10.Still532.jpg" onclick="handleImageClick('app', 'DIA 1 SYNC BRUTO TIMECODE.16_17_25_10.Still532')">
+            <img src="images/app/jpg/DIA 1 SYNC BRUTO TIMECODE.16_19_18_05.Still558.jpg" onclick="handleImageClick('app', 'DIA 1 SYNC BRUTO TIMECODE.16_19_18_05.Still558')">
         </div>
     </div>
    
     <div class="video-container">
         <div id="video-drums" class="video-asset">
-            <video width="600" controls><source src="video/Eric Assarsson.mp4" type="video/mp4"></video>
-            <video width="600" controls><source src="video/Marty Music.mp4" type="video/mp4"></video>
-            <video width="600" controls><source src="video/Sped Spedding.mp4" type="video/mp4"></video>
+            <div class="video-asset-container">
+                <div class="video-button-container">
+                    <button onclick="playSegment('video1', 12)">12~13</button>
+                    <button onclick="playSegment('video1', 24)">12~13</button>
+                    <button onclick="playSegment('video1', 36)">12~13</button>
+                </div>
+                <video id="video1" width="600" controls>
+                    <source src="video/Eric Assarsson.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <div class="video-asset-container">
+                <div class="video-button-container">
+                    <button onclick="playSegment('video2', 259)">259 seconds</button>
+                    <button onclick="playSegment('video2', 338)">338 seconds</button>
+                    <button onclick="playSegment('video2', 536)">536 seconds</button>
+                </div>
+                <video id="video2" width="600" controls>
+                    <source src="video/Marty Music.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <div class="video-asset-container">
+                <div class="video-button-container">
+                    <button onclick="playSegment('video3', 303)">297 seconds</button>
+                    <button onclick="playSegment('video3', 306)">300 seconds</button>
+                    <button onclick="playSegment('video3', 312)">306 seconds</button>
+                </div>
+                <video id="video3" width="600" controls>
+                    <source src="video/Sped Spedding.mp4" type="video/mp4">
+                </video>
+            </div>
         </div>
     </div>
 
@@ -156,7 +278,7 @@
         function reset(){
             document.getElementById('image-drums').style.display = 'none';
             document.getElementById('image-producer').style.display = 'none';
-            document.getElementById('image-bass').style.display = 'none';
+            document.getElementById('image-app').style.display = 'none';
             document.getElementById('video-drums').style.display = 'none';
         }
 
@@ -175,17 +297,17 @@
             }
 
             var query = document.getElementById('searchBox').value;
-            if (query.includes("drums")) {
+            if (query.includes("drum")) {
                 document.getElementById('image-drums').style.display = 'block';
             }
             else if (query.includes("producer")) {
                 document.getElementById('image-producer').style.display = 'block';
             }
-            else if (query.includes("bass")) {
-                document.getElementById('image-bass').style.display = 'block';
+            else if (query.includes("mobile")) {
+                document.getElementById('image-app').style.display = 'block';
             }
             else {
-                alert("Can't find the result!")
+                alert("Can't find the image that matches!")
             }
         }
 
@@ -194,11 +316,11 @@
                 reset()
             }
             var query = document.getElementById('searchBox').value;
-            if (query.includes("guitar")) {
+            if (query.includes("chord")) {
                 document.getElementById('video-drums').style.display = 'block';
             }
             else {
-                alert("Can't find the result!")
+                alert("Can't find the video that matches!")
             }
         }
 
@@ -227,11 +349,29 @@
             else {
                 var extension = '.tif'
             }
-            a.href = 'https://github.com/amyhungmoises/hackthon_branding/tree/main/images/'+inst_message+'/'+format+'/'+id_message+extension;
+            a.href = 'images/'+inst_message+'/'+format+'/'+id_message+extension;
             a.download = id_message+extension;
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
+
+            document.getElementById('overlay').style.display = 'none';
+        }
+
+        function playSegment(video_id, startTime) {
+            const video = document.getElementById(video_id);
+            // const startTime = 10; // Start time in seconds
+            // const endTime = 20;   // End time in seconds
+
+            video.currentTime = startTime;
+            video.play();
+
+            // const checkEndTime = setInterval(() => {
+            //     if (video.currentTime >= endTime) {
+            //         video.pause();
+            //         clearInterval(checkEndTime);
+            //     }
+            // }, 100);
         }
 
 
