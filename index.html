@@ -110,11 +110,11 @@
 
     <div class="image-container">
         <div id="image-drums" class="image-asset">
-            <img src="images/drums/jpg/DIA 1 SYNC BRUTO TIMECODE.13_56_18_12.Still217.jpg" onclick="handleImageClick('drum', 'DIA 1 SYNC BRUTO TIMECODE.13_56_18_12.Still217')">
-            <img src="images/drums/jpg/DIA 1 SYNC BRUTO TIMECODE.13_57_17_19.Still219.jpg" onclick="handleImageClick('drum', 'DIA 1 SYNC BRUTO TIMECODE.13_57_17_19.Still219')">
-            <img src="images/drums/jpg/DIA 1 SYNC BRUTO TIMECODE.14_03_09_02.Still258.jpg" onclick="handleImageClick('drum', 'DIA 1 SYNC BRUTO TIMECODE.14_03_09_02.Still258')">
-            <img src="images/drums/jpg/DIA 1 SYNC BRUTO TIMECODE.14_03_22_08.Still263.jpg" onclick="handleImageClick('drum', 'DIA 1 SYNC BRUTO TIMECODE.14_03_22_08.Still263')">
-            <img src="images/drums/jpg/DIA 1 SYNC BRUTO TIMECODE.14_08_41_21.Still310.jpg" onclick="handleImageClick('drum', 'DIA 1 SYNC BRUTO TIMECODE.14_08_41_21.Still310')">
+            <img src="images/drums/jpg/DIA 1 SYNC BRUTO TIMECODE.13_56_18_12.Still217.jpg" onclick="handleImageClick('drums', 'DIA 1 SYNC BRUTO TIMECODE.13_56_18_12.Still217')">
+            <img src="images/drums/jpg/DIA 1 SYNC BRUTO TIMECODE.13_57_17_19.Still219.jpg" onclick="handleImageClick('drums', 'DIA 1 SYNC BRUTO TIMECODE.13_57_17_19.Still219')">
+            <img src="images/drums/jpg/DIA 1 SYNC BRUTO TIMECODE.14_03_09_02.Still258.jpg" onclick="handleImageClick('drums', 'DIA 1 SYNC BRUTO TIMECODE.14_03_09_02.Still258')">
+            <img src="images/drums/jpg/DIA 1 SYNC BRUTO TIMECODE.14_03_22_08.Still263.jpg" onclick="handleImageClick('drums', 'DIA 1 SYNC BRUTO TIMECODE.14_03_22_08.Still263')">
+            <img src="images/drums/jpg/DIA 1 SYNC BRUTO TIMECODE.14_08_41_21.Still310.jpg" onclick="handleImageClick('drums', 'DIA 1 SYNC BRUTO TIMECODE.14_08_41_21.Still310')">
         </div>
         <div id="image-producer" class="image-asset">
             <img src="images/producer/jpg/IMG_2504.jpg" onclick="handleImageClick('producer', 'IMG_2504')">
@@ -134,8 +134,9 @@
    
     <div class="video-container">
         <div id="video-drums" class="video-asset">
-            <video width="600" controls><source src="video/test.mp4" type="video/mp4"></video>
-       
+            <video width="600" controls><source src="video/Eric Assarsson.mp4" type="video/mp4"></video>
+            <video width="600" controls><source src="video/Marty Music.mp4" type="video/mp4"></video>
+            <video width="600" controls><source src="video/Sped Spedding.mp4" type="video/mp4"></video>
         </div>
     </div>
 
@@ -193,7 +194,7 @@
                 reset()
             }
             var query = document.getElementById('searchBox').value;
-            if (query.includes("drums")) {
+            if (query.includes("guitar")) {
                 document.getElementById('video-drums').style.display = 'block';
             }
             else {
@@ -226,8 +227,7 @@
             else {
                 var extension = '.tif'
             }
-            alert('images/'+inst_message+'/'+format+'/'+id_message+extension)
-            a.href = 'images/'+inst_message+'/'+format+'/'+id_message+extension;
+            a.href = 'https://github.com/amyhungmoises/hackthon_branding/tree/main/images/'+inst_message+'/'+format+'/'+id_message+extension;
             a.download = id_message+extension;
             document.body.appendChild(a);
             a.click();
