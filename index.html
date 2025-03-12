@@ -52,6 +52,39 @@
             align-items: center; /* Vertically aligns the items if needed */
             margin-left: 10px;
         }
+
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        #dialog {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            width: 300px;
+        }
+
+        .dialog-button {
+            margin: 10px;
+            padding: 10px 20px;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+        }
+        
+        .confirm-button {
+            background-color: #4CAF50;
+            color: white;
+        }
        
     </style>
 </head>
@@ -77,25 +110,25 @@
 
     <div class="image-container">
         <div id="image-drums" class="image-asset">
-            <img src="images/drums/jpg/DIA 1 SYNC BRUTO TIMECODE.13_56_18_12.Still217.jpg" style="cursor: pointer;" onclick="handleImageClick('drum', 'DIA 1 SYNC BRUTO TIMECODE.13_56_18_12.Still217')">
-            <img src="images/drums/jpg/DIA 1 SYNC BRUTO TIMECODE.13_57_17_19.Still219.jpg">
-            <img src="images/drums/jpg/DIA 1 SYNC BRUTO TIMECODE.14_03_09_02.Still258.jpg">
-            <img src="images/drums/jpg/DIA 1 SYNC BRUTO TIMECODE.14_03_22_08.Still263.jpg">
-            <img src="images/drums/jpg/DIA 1 SYNC BRUTO TIMECODE.14_08_41_21.Still310.jpg">
+            <img src="images/drums/jpg/DIA 1 SYNC BRUTO TIMECODE.13_56_18_12.Still217.jpg" onclick="handleImageClick('drum', 'DIA 1 SYNC BRUTO TIMECODE.13_56_18_12.Still217')">
+            <img src="images/drums/jpg/DIA 1 SYNC BRUTO TIMECODE.13_57_17_19.Still219.jpg" onclick="handleImageClick('drum', 'DIA 1 SYNC BRUTO TIMECODE.13_57_17_19.Still219')">
+            <img src="images/drums/jpg/DIA 1 SYNC BRUTO TIMECODE.14_03_09_02.Still258.jpg" onclick="handleImageClick('drum', 'DIA 1 SYNC BRUTO TIMECODE.14_03_09_02.Still258')">
+            <img src="images/drums/jpg/DIA 1 SYNC BRUTO TIMECODE.14_03_22_08.Still263.jpg" onclick="handleImageClick('drum', 'DIA 1 SYNC BRUTO TIMECODE.14_03_22_08.Still263')">
+            <img src="images/drums/jpg/DIA 1 SYNC BRUTO TIMECODE.14_08_41_21.Still310.jpg" onclick="handleImageClick('drum', 'DIA 1 SYNC BRUTO TIMECODE.14_08_41_21.Still310')">
         </div>
         <div id="image-producer" class="image-asset">
-            <img src="images/producer/jpg/IMG_2504.jpg">
-            <img src="images/producer/jpg/IMG_2511.jpg">
-            <img src="images/producer/jpg/IMG_3047.jpg">
-            <img src="images/producer/jpg/IMG_3215.jpg">
-            <img src="images/producer/jpg/IMG_3299 copy.jpg">
+            <img src="images/producer/jpg/IMG_2504.jpg" onclick="handleImageClick('producer', 'IMG_2504')">
+            <img src="images/producer/jpg/IMG_2511.jpg" onclick="handleImageClick('producer', 'IMG_2511')">
+            <img src="images/producer/jpg/IMG_3047.jpg" onclick="handleImageClick('producer', 'IMG_3047')">
+            <img src="images/producer/jpg/IMG_3215.jpg" onclick="handleImageClick('producer', 'IMG_3215')">
+            <img src="images/producer/jpg/IMG_3299 copy.jpg" onclick="handleImageClick('producer', 'IMG_3299 copy')">
         </div>
         <div id="image-bass" class="image-asset">
-            <img src="images/bass/jpg/DIA 1 SYNC BRUTO TIMECODE.12_13_41_19.Still140.jpg">
-            <img src="images/bass/jpg/DIA 1 SYNC BRUTO TIMECODE.12_19_20_02.Still162.jpg">
-            <img src="images/bass/jpg/DIA 1 SYNC BRUTO TIMECODE.14_38_38_18.Still324.jpg">
-            <img src="images/bass/jpg/DIA 1 SYNC BRUTO TIMECODE.14_38_48_13.Still325.jpg">
-            <img src="images/bass/jpg/DIA 1 SYNC BRUTO TIMECODE.14_39_13_02.Still327.jpg">
+            <img src="images/bass/jpg/DIA 1 SYNC BRUTO TIMECODE.12_13_41_19.Still140.jpg" onclick="handleImageClick('bass', 'DIA 1 SYNC BRUTO TIMECODE.12_13_41_19.Still140')">
+            <img src="images/bass/jpg/DIA 1 SYNC BRUTO TIMECODE.12_19_20_02.Still162.jpg" onclick="handleImageClick('bass', 'DIA 1 SYNC BRUTO TIMECODE.12_19_20_02.Still162')">
+            <img src="images/bass/jpg/DIA 1 SYNC BRUTO TIMECODE.14_38_38_18.Still324.jpg" onclick="handleImageClick('bass', 'DIA 1 SYNC BRUTO TIMECODE.14_38_38_18.Still324')">
+            <img src="images/bass/jpg/DIA 1 SYNC BRUTO TIMECODE.14_38_48_13.Still325.jpg" onclick="handleImageClick('bass', 'DIA 1 SYNC BRUTO TIMECODE.14_38_48_13.Still325')">
+            <img src="images/bass/jpg/DIA 1 SYNC BRUTO TIMECODE.14_39_13_02.Still327.jpg" onclick="handleImageClick('bass', 'DIA 1 SYNC BRUTO TIMECODE.14_39_13_02.Still327')">
         </div>
     </div>
    
@@ -105,9 +138,20 @@
        
         </div>
     </div>
+
+    <div id="overlay">
+        <div id="dialog">
+            <p>Which format do you want to download?</p>
+            <button class="dialog-button confirm-button" onclick="handleResponse('jpg')">jpg</button>
+            <button class="dialog-button cancel-button" onclick="handleResponse('raw')">raw</button>
+        </div>
+    </div>
    
 
     <script>
+        let id_message = '';
+        let inst_message = '';
+
         function reset(){
             document.getElementById('image-drums').style.display = 'none';
             document.getElementById('image-producer').style.display = 'none';
@@ -164,16 +208,30 @@
         }
 
         function handleImageClick(inst, img_id) {
-            // Show an option in an alert
-            if (confirm("Do you want to download this image?")) {
-                // If the user confirms, start the download
-                var a = document.createElement('a');
-                a.href = 'images/'+inst+'/jpg/'+img_id+'.jpg';
-                a.download = 'your-image.jpg';
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
+            inst_message = inst
+            id_message = img_id
+
+            showAlert(inst, img_id)
+        }
+
+        function showAlert(inst, img_id) {
+            document.getElementById('overlay').style.display = 'flex';
+        }
+
+        function handleResponse(format) {
+            var a = document.createElement('a');
+            if (format == 'jpg'){
+                var extension = '.jpg'
             }
+            else {
+                var extension = '.tif'
+            }
+            alert('images/'+inst_message+'/'+format+'/'+id_message+extension)
+            a.href = 'images/'+inst_message+'/'+format+'/'+id_message+extension;
+            a.download = id_message+extension;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
         }
 
 
