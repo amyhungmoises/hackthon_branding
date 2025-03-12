@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Bar Example</title>
+    <style>
+        .search-container {
+            text-align: center;
+            margin-top: 50px;
+        }
+        input[type="text"] {
+            width: 300px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .hiddenContent {
+            display: none;
+            margin-top: 20px;
+            font-size: 14px;
+            color: green;
+        }
+
+        .image-container {
+            margin-top: 20px;
+        }
+
+        .image-asset{
+            display: none;            
+        }
+
+        img {
+            max-width: 200px;
+            margin: 10px;
+        }
+
+        .video-container {
+            margin-top: 20px;
+        }
+        .video-asset{
+            display: none;            
+        }
+        .button-container {
+            display: flex;
+            justify-content: center; /* Center-aligns the items horizontally */
+            align-items: center; /* Vertically aligns the items if needed */
+            margin-left: 10px;
+        }
+       
+    </style>
+</head>
+<body>
+    <div class="search-container">
+        <input type="text" id="searchBox" placeholder="Search...">
+        <input type="button" value="Search" onclick="performSearch()">
+    </div>
+
+    <div class="button-container">
+        <div id="Image" class="hiddenContent">
+            <input type="button" value="Image" onclick="click_image(true)">
+        </div>
+
+        <div id="Video" class="hiddenContent">
+            <input type="button" value="Video" onclick="click_video(true)">
+        </div>
+
+        <div id="All" class="hiddenContent">
+            <input type="button" value="All" onclick="click_all()">
+        </div>
+    </div>
+
+    <div class="image-container">
+        <div id="image-drums" class="image-asset">
+            <img src="images/drums/jpg/DIA 1 SYNC BRUTO TIMECODE.13_56_18_12.Still217.jpg" style="cursor: pointer;" onclick="handleImageClick('drum', 'DIA 1 SYNC BRUTO TIMECODE.13_56_18_12.Still217')">
+            <img src="images/drums/jpg/DIA 1 SYNC BRUTO TIMECODE.13_57_17_19.Still219.jpg">
+            <img src="images/drums/jpg/DIA 1 SYNC BRUTO TIMECODE.14_03_09_02.Still258.jpg">
+            <img src="images/drums/jpg/DIA 1 SYNC BRUTO TIMECODE.14_03_22_08.Still263.jpg">
+            <img src="images/drums/jpg/DIA 1 SYNC BRUTO TIMECODE.14_08_41_21.Still310.jpg">
+        </div>
+        <div id="image-producer" class="image-asset">
+            <img src="images/producer/jpg/IMG_2504.jpg">
+            <img src="images/producer/jpg/IMG_2511.jpg">
+            <img src="images/producer/jpg/IMG_3047.jpg">
+            <img src="images/producer/jpg/IMG_3215.jpg">
+            <img src="images/producer/jpg/IMG_3299 copy.jpg">
+        </div>
+        <div id="image-bass" class="image-asset">
+            <img src="images/bass/jpg/DIA 1 SYNC BRUTO TIMECODE.12_13_41_19.Still140.jpg">
+            <img src="images/bass/jpg/DIA 1 SYNC BRUTO TIMECODE.12_19_20_02.Still162.jpg">
+            <img src="images/bass/jpg/DIA 1 SYNC BRUTO TIMECODE.14_38_38_18.Still324.jpg">
+            <img src="images/bass/jpg/DIA 1 SYNC BRUTO TIMECODE.14_38_48_13.Still325.jpg">
+            <img src="images/bass/jpg/DIA 1 SYNC BRUTO TIMECODE.14_39_13_02.Still327.jpg">
+        </div>
+    </div>
+   
+    <div class="video-container">
+        <div id="video-drums" class="video-asset">
+            <video width="600" controls><source src="video/test.mp4" type="video/mp4"></video>
+       
+        </div>
+    </div>
+   
+
+    <script>
+        function reset(){
+            document.getElementById('image-drums').style.display = 'none';
+            document.getElementById('image-producer').style.display = 'none';
+            document.getElementById('image-bass').style.display = 'none';
+            document.getElementById('video-drums').style.display = 'none';
+        }
+
+        function performSearch() {
+            reset()
+
+            var elements = document.getElementsByClassName('hiddenContent');
+            for (var i = 0; i < elements.length; i++) {
+                elements[i].style.display = 'block';
+            }
+        }
+
+        function click_image(isReset) {
+            if (isReset) {
+                reset()
+            }
+
+            var query = document.getElementById('searchBox').value;
+            if (query.includes("drums")) {
+                document.getElementById('image-drums').style.display = 'block';
+            }
+            else if (query.includes("producer")) {
+                document.getElementById('image-producer').style.display = 'block';
+            }
+            else if (query.includes("bass")) {
+                document.getElementById('image-bass').style.display = 'block';
+            }
+            else {
+                alert("Can't find the result!")
+            }
+        }
+
+        function click_video(isReset) {
+            if (isReset) {
+                reset()
+            }
+            var query = document.getElementById('searchBox').value;
+            if (query.includes("drums")) {
+                document.getElementById('video-drums').style.display = 'block';
+            }
+            else {
+                alert("Can't find the result!")
+            }
+        }
+
+        function click_all() {
+            reset()
+            click_image(false)
+            click_video(false)
+        }
+
+        function handleImageClick(inst, img_id) {
+            // Show an option in an alert
+            if (confirm("Do you want to download this image?")) {
+                // If the user confirms, start the download
+                var a = document.createElement('a');
+                a.href = 'images/'+inst+'/jpg/'+img_id+'.jpg';
+                a.download = 'your-image.jpg';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            }
+        }
+
+
+    </script>
+</body>
+</html>
